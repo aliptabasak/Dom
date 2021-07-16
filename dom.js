@@ -15,12 +15,21 @@ var header=document.getElementById('main-header');
 header.style.borderBottom='solid 3px #000';
 var title=document.getElementsByClassName('title');
 // console.log(title[0]);
-title[0].style.fontWeight='bold';
-title[0].style.color='green';
-var list=document.getElementsByClassName('list-group-item');
-list[1].style.backgroundColor='green';
-list[2].style.display='none';
+// title[0].style.fontWeight='bold';
+// title[0].style.color='green';
+
+// var list=document.getElementsByClassName('list-group-item');
+// list[1].style.backgroundColor='green';
+// list[2].style.display='none';
 
 // for(var i=0;i<list.length;i++){
 //     list[i].style.fontWeight='bold';
 // }
+
+var secondItem=document.querySelector('.list-group-item:nth-child(2)');
+secondItem.style.color='green';
+
+var odd=document.querySelectorAll('li:nth-child(odd)');
+for(var i=0;i<odd.length;i++){
+    odd[i].style.backgroundColor='green';
+}
