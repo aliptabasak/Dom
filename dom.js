@@ -17,3 +17,9 @@ var title=document.getElementsByClassName('title');
 // console.log(title[0]);
 title[0].style.fontWeight='bold';
 title[0].style.color='green';
+var list=document.getElementsByClassName('list-group-item');
+list[2].style.backgroundColor='green';
+
+for(var i=0;i<list.length;i++){
+    list[i].style.fontWeight='bold';
+}
