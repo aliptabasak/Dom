@@ -34,7 +34,7 @@
 //     odd[i].style.backgroundColor='green';
 // }
 
-var itemList=document.querySelector('#items');
+// var itemList=document.querySelector('#items');
 //parentnode
 // console.log(itemList.parentNode);
 // itemList.parentNode.style.backgroundColor='#f4f4f4';
@@ -71,19 +71,101 @@ var itemList=document.querySelector('#items');
 
 //createelement
 //create div
-var newDiv=document.createElement('div');
-newDiv.className='hello';
-newDiv.id='hello1';
-newDiv.setAttribute('title','Hello Div');
-//create text node
-var newDivtext=document.createTextNode('HEllo');
-//add text to div
-newDiv.appendChild(newDivtext);
-console.log(newDiv);
-var container=document.querySelector('header .container');
-var h1=document.querySelector('header h1');
-container.insertBefore(newDiv,h1);
+// var newDiv=document.createElement('div');
+// newDiv.className='hello';
+// newDiv.id='hello1';
+// newDiv.setAttribute('title','Hello Div');
+// //create text node
+// var newDivtext=document.createTextNode('HEllo');
+// //add text to div
+// newDiv.appendChild(newDivtext);
+// console.log(newDiv);
+// var container=document.querySelector('header .container');
+// var h1=document.querySelector('header h1');
+// container.insertBefore(newDiv,h1);
 
 // var listGroup=document.querySelector('title .list-group-item');
 // var item1=document.querySelector('title li');
 // listGroup.insertBefore(newDiv,item1);
+
+
+
+var form=document.getElementById('addForm');
+var itemList=document.getElementById('items');
+var editContent=document.getElementById('edit');
+var edit_button = document.getElementById('edit-button');
+var filter = document.getElementById('filter');
+
+form.addEventListener('submit',addItem);
+itemList.addEventListener('click',removeItem);
+filter.addEventListener('keyup', filterItems);
+
+edit_button.addEventListener("click", function() {
+    var editBtn=document.createElement('button');
+    editBtn.className='btn btn-info btn-sm float-right edit';
+    editBtn.appendChild(document.createTextNode('Edit'));
+    
+
+    editContent.contentEditable = true;
+    editContent.style.backgroundColor = "#dddbdb";
+    itemList.appendChild(edit_button);
+   
+  } );
+
+
+
+function addItem(e){
+    e.preventDefault();
+var newItem=document.getElementById('item').value;
+
+var li=document.createElement('li');
+li.className='list-group-item';
+li.appendChild(document.createTextNode(newItem));
+
+var deleteBtn=document.createElement('button');
+deleteBtn.className='btn btn-danger btn-sm float-right delete';
+deleteBtn.appendChild(document.createTextNode('X'));
+
+var editBtn=document.createElement('button');
+editBtn.className='btn btn-info btn-sm float-right edit';
+editBtn.appendChild(document.createTextNode('Edit'));
+li.appendChild(editBtn);
+
+li.appendChild(deleteBtn);
+li.appendChild(editBtn);
+
+
+itemList.appendChild(li);
+}
+
+function removeItem(e){
+    if(e.target.classList.contains('delete')){
+       if(confirm('Are you sure?')) {
+           var li=e.target.parentElement;
+        itemList.removeChild(li);
+    }
+        
+    }
+}
+// function editItem(e){
+ 
+
+//    editContent.contentEditable=true;
+//    editContent.style.background='#dddbdb';
+
+// }
+function filterItems(e){
+    // convert text to lowercase
+    var text = e.target.value.toLowerCase();
+    // Get lis
+    var items = itemList.getElementsByTagName('li');
+    // Convert to an array
+    Array.from(items).forEach(function(item){
+      var itemName = item.firstChild.textContent;
+      if(itemName.toLowerCase().indexOf(text) != -1){
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  } 
